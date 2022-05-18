@@ -34,13 +34,15 @@ namespace ET
     {
         public override void Destroy(AIComponent self)
         {
-            TimerComponent.Instance.Remove(ref self.Timer);
+            TimerComponent.Instance?.Remove(ref self.Timer);
             self.CancellationToken?.Cancel();
             self.CancellationToken = null;
             self.Current = 0;
         }
     }
 
+    [FriendClass(typeof(AIComponent))]
+    [FriendClass(typeof(AIDispatcherComponent))]
     public static class AIComponentSystem
     {
         public static void Check(this AIComponent self)

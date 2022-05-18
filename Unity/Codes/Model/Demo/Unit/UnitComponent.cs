@@ -1,12 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace ET
+﻿namespace ET
 {
-	
-	public class UnitComponent: Entity
+	[ChildType(typeof(Unit))]
+	public class UnitComponent: Entity, IAwake, IDestroy
 	{
-		public Dictionary<long, Unit> idUnits = new Dictionary<long, Unit>();
-		public Unit MyUnit;
 	}
 }

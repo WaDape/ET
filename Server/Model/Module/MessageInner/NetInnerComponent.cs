@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Net;
 
 namespace ET
 {
@@ -18,7 +19,8 @@ namespace ET
         }
     }
 
-    public class NetInnerComponent: Entity
+    [ChildType(typeof(Session))]
+    public class NetInnerComponent: Entity, IAwake<IPEndPoint, int>, IAwake<int>, IDestroy
     {
         public AService Service;
 

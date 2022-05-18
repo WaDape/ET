@@ -117,7 +117,7 @@ namespace ET
 
             BuildTargetGroup buildTargetGroup = BuildPipeline.GetBuildTargetGroup(EditorUserBuildSettings.activeBuildTarget);
 
-            assemblyBuilder.compilerOptions.CodeOptimization = codeOptimization;
+            //assemblyBuilder.compilerOptions.CodeOptimization = codeOptimization;
             assemblyBuilder.compilerOptions.ApiCompatibilityLevel = PlayerSettings.GetApiCompatibilityLevel(buildTargetGroup);
             // assemblyBuilder.compilerOptions.ApiCompatibilityLevel = ApiCompatibilityLevel.NET_4_6;
 
@@ -206,5 +206,10 @@ namespace ET
             game?.ShowNotification(new GUIContent($"{tips}"));
         }
     }
-    
+
+    public enum CodeOptimization
+    {
+        Debug,
+        Release
+    }
 }

@@ -26,5 +26,9 @@ namespace ET
 		 public const ushort G2C_TestHotfixMessage = 10023;
 		 public const ushort C2M_TestRobotCase = 10024;
 		 public const ushort M2C_TestRobotCase = 10025;
+		 public const ushort C2R_LoginTest = 10026;
+		 public const ushort R2C_LoginTest = 10027;
+		 public const ushort C2R_SayHello = 10028;
+		 public const ushort R2C_SayGoodBye = 10029;
 	}
 }

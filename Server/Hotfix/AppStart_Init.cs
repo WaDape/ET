@@ -29,6 +29,18 @@ namespace ET
             
             Game.Scene.AddComponent<NetThreadComponent>();
 
+            
+            
+            
+            Computer computer = Game.Scene.AddChild<Computer>();
+
+            computer.AddChild<PCCaseComponent>();
+            computer.AddChild<MonitorsComponent>();
+            computer.AddChild<KeyBoardComponent>();
+            computer.AddChild<MouseComponent>();
+			
+            computer.Start();
+            
             switch (Game.Options.AppType)
             {
                 case AppType.Server:

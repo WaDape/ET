@@ -38,15 +38,14 @@ namespace ET
 	/// <summary>
 	/// 管理所有UI GameObject 以及UI事件
 	/// </summary>
+	[FriendClass(typeof(UIEventComponent))]
 	public static class UIEventComponentSystem
 	{
-		public static async ETTask<UI> OnCreate(this UIEventComponent self, UIComponent uiComponent, string uiType)
+		public static async ETTask<UI> OnCreate(this UIEventComponent self, UIComponent uiComponent, string uiType, UILayer uiLayer)
 		{
 			try
 			{
-				UI ui = await self.UIEvents[uiType].OnCreate(uiComponent);
-				UILayer uiLayer = ui.GameObject.GetComponent<UILayerScript>().UILayer;
-				ui.GameObject.transform.SetParent(self.UILayers[(int)uiLayer]);
+				UI ui = await self.UIEvents[uiType].OnCreate(uiComponent, uiLayer);
 				return ui;
 			}
 			catch (Exception e)

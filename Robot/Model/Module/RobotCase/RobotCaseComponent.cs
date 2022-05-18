@@ -2,7 +2,8 @@
 
 namespace ET
 {
-    public class RobotCaseComponent: Entity
+    [ChildType(typeof(RobotCase))]
+    public class RobotCaseComponent: Entity, IAwake, IDestroy
     {
         public static RobotCaseComponent Instance;
         public Dictionary<int, RobotCase> RobotCases = new Dictionary<int, RobotCase>();

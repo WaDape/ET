@@ -5,42 +5,28 @@ using MongoDB.Driver;
 
 namespace ET
 {
-	public class DBComponentAwakeSystem : AwakeSystem<DBComponent, string, string>
-	{
-		public override void Awake(DBComponent self, string dbConnection, string dbName)
-		{
-			self.mongoClient = new MongoClient(dbConnection);
-			self.database = self.mongoClient.GetDatabase(dbName);
-			
-			self.Transfers.Clear();
-			foreach (Type type in Game.EventSystem.GetTypes().Values)
-			{
-				if (type == typeof (IDBCollection))
-				{
-					continue;
-				}
-				if (!typeof(IDBCollection).IsAssignableFrom(type))
-				{
-					continue;
-				}
-				self.Transfers.Add(type.Name);
-			}
-			
-			DBComponent.Instance = self;
-		}
-	}
-	
-    public class DBComponentDestroySystem: DestroySystem<DBComponent>
-    {
-        public override void Destroy(DBComponent self)
-        {
-	        DBComponent.Instance = null;
-	        self.Transfers.Clear();
-        }
-    }
-	
+	[FriendClass(typeof(DBComponent))]
     public static class DBComponentSystem
     {
+	    public class DBComponentAwakeSystem : AwakeSystem<DBComponent, string, string, int>
+	    {
+		    public override void Awake(DBComponent self, string dbConnection, string dbName, int zone)
+		    {
+			    self.mongoClient = new MongoClient(dbConnection);
+			    self.database = self.mongoClient.GetDatabase(dbName);
+		    }
+	    }
+
+	    private static IMongoCollection<T> GetCollection<T>(this DBComponent self, string collection = null)
+	    {
+		    return self.database.GetCollection<T>(collection ?? typeof (T).Name);
+	    }
+
+	    private static IMongoCollection<Entity> GetCollection(this DBComponent self, string name)
+	    {
+		    return self.database.GetCollection<Entity>(name);
+	    }
+	    
 	    #region Query
 
 	    public static async ETTask<T> Query<T>(this DBComponent self, long id, string collection = null) where T : Entity

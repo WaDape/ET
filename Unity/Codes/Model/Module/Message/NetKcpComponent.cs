@@ -1,6 +1,9 @@
-﻿namespace ET
+﻿using System.Net;
+
+namespace ET
 {
-    public class NetKcpComponent: Entity
+    [ChildType(typeof(Session))]
+    public class NetKcpComponent: Entity, IAwake<int>, IAwake<IPEndPoint, int>, IDestroy
     {
         public AService Service;
         

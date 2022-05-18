@@ -1,7 +1,7 @@
 ﻿namespace ET
 {
-	public class SessionComponent: Entity
+	public class SessionComponent: Entity, IAwake, IDestroy
 	{
-		public Session Session;
+		public Session Session { get; set; }
 	}
 }
